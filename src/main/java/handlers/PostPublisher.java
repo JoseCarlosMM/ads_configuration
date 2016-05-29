@@ -2,18 +2,18 @@ package handlers;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import dtos.Advertiser;
+import dtos.Publisher;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  * Created by josec on 5/29/2016.
  */
-public class PostAdvertiser extends BaseHandler{
-    public String postAdvertiser(Advertiser advertiser, Context context) throws CustomException {
-        if (isStringNullOrEmpty(advertiser.getName())) {
+public class PostPublisher extends BaseHandler{
+    public String postPublisher(Publisher publisher, Context context) throws CustomException {
+        if (isStringNullOrEmpty(publisher.getName())) {
             throw new CustomException("nullexception: Name must not be null or empty.");
         }
         JSONObject json = new JSONObject();
@@ -21,11 +21,12 @@ public class PostAdvertiser extends BaseHandler{
         {
             openConnection();
             connection.setAutoCommit(false);
-            executeUpdate("INSERT INTO adsconfiguration.Advertiser (name) VALUES ('"
-                    +advertiser.getName()+"');");
-            ResultSet rs = executeQuery("SELECT ID_advertiser FROM adsconfiguration.Advertiser WHERE name = '"+advertiser.getName()+"'ORDER BY ID_advertiser DESC LIMIT 1;");
+            executeUpdate("INSERT INTO adsconfiguration.Publisher (name) VALUES ('"
+                    +publisher.getName()+"');");
+            ResultSet rs = executeQuery("SELECT ID_publisher FROM adsconfiguration.Publisher WHERE name = '"+publisher.getName()
+                    +"' ORDER BY ID_publisher DESC LIMIT 1;");
             while (rs.next()) {
-                json.put("id",rs.getString("ID_advertiser"));
+                json.put("id",rs.getString("ID_publisher"));
             }
             connection.commit();
             closeConnection();

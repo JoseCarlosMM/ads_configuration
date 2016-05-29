@@ -29,7 +29,7 @@ public class GetAdvertisers extends BaseHandler {
             connection.commit();
             closeConnection();
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
             System.err.println(e.getMessage());
             try {
