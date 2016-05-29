@@ -26,7 +26,28 @@ public class BaseHandler {
         return stmt.executeQuery(stQuery);
     }
 
+    protected void executeUpdate(String stQuery) throws SQLException {
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate(stQuery);
+    }
     protected void closeConnection() throws SQLException {
         connection.close();
+    }
+    protected boolean isStringNullOrEmpty(String st)
+    {
+        return (st==null || st=="");
+    }
+
+    public class CustomException extends Exception {
+        public String message;
+
+        public CustomException(String message){
+            this.message = message;
+        }
+
+        @Override
+        public String getMessage(){
+            return message;
+        }
     }
 }
