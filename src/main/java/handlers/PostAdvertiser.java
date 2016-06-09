@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * Created by josec on 5/29/2016.
  */
 public class PostAdvertiser extends BaseHandler{
-    public String postAdvertiser(Advertiser advertiser, Context context) throws CustomException {
+    public JSONObject postAdvertiser(Advertiser advertiser, Context context) throws CustomException {
         if (isStringNullOrEmpty(advertiser.getName())) {
             throw new CustomException("nullexception: Name must not be null or empty.");
         }
@@ -38,6 +38,6 @@ public class PostAdvertiser extends BaseHandler{
             } catch (SQLException e1) {}
         }
         System.out.println(json.toJSONString());
-        return json.toJSONString();
+        return json;
     }
 }

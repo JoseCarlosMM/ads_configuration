@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by josec on 5/29/2016.
  */
 public class GetPublisherCampaignComission extends BaseHandler {
-    public String getPublisherCampaignComission(PublisherCampaignComssion campaign, Context context) throws CustomException {
+    public JSONObject getPublisherCampaignComission(PublisherCampaignComssion campaign, Context context) throws CustomException {
         JSONObject jsonObject = new JSONObject();
         try
         {
@@ -46,6 +46,6 @@ public class GetPublisherCampaignComission extends BaseHandler {
             } catch (SQLException e1) {}
         }
         System.out.println(jsonObject.toJSONString());
-        return jsonObject.toJSONString();
+        return jsonObject;
     }
 }
